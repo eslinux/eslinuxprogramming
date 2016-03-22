@@ -42,12 +42,14 @@ Base* CreateRandom()
 int main()
 {
     /* regular cast */
-    float d=3.14159265;
-    int i = static_cast<int>(d);
-    cout << "i = " << i << endl << endl;
+//    float d=3.14159265;
+//    int i = static_cast<int>(d);
+//    cout << "i = " << i << endl << endl;
 
 
-    for( int n = 0; n < 10; ++n )
+
+
+    for( int n = 0; n < 5; ++n )
     {
         Base* base = CreateRandom();
 
