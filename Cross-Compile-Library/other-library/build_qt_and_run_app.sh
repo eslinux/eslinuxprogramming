@@ -1,11 +1,11 @@
 
 
 #build QT => cd to qtbase folder
-RPI_TOOLCHAIN=/home/linuxpc/Downloads/tools-rpi/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-
-RPI_SYSROOT=/home/linuxpc/Downloads/face_recognition/ISO/raspbian-jessie-lite-rootfs
+RPI_TOOLCHAIN=/opt/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-
+RPI_SYSROOT=/home/linuxpc/2017-07-05-raspbian-jessie-lite-rootfs
 
 #correct link rootfs
-/home/linuxpc/Downloads/face_recognition/sysroot-relativelinks.py $RPI_SYSROOT
+sysroot-relativelinks.py $RPI_SYSROOT
 
 
 #configure
@@ -14,7 +14,7 @@ RPI_SYSROOT=/home/linuxpc/Downloads/face_recognition/ISO/raspbian-jessie-lite-ro
 -opensource -confirm-license -optimized-qmake \
 -reduce-exports -release -make libs -skip qtwebkit \
 -sysroot $RPI_SYSROOT \
--prefix /usr/local/qt5pilite
+-prefix /usr/local/qt5pi
 
 
 
