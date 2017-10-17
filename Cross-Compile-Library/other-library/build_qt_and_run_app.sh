@@ -18,14 +18,14 @@ sysroot-relativelinks.py $RPI_SYSROOT
 
 
 
-#affter install /usr/local/qt5pi (qmake for host) and $RPI_SYSROOT/usr/local/qt5pi  (lib for rpi)
+#affter install you have 2 folder: one is /usr/local/qt5pi (qmake for host) and one is $RPI_SYSROOT/usr/local/qt5pi  (lib for rpi)
 make -j4
 make install
 
 
 
 #run app must have rootfs (mount rootfs of rpi to host) link the same as when cross-compile (/run/media/linuxpc/62ca0b6d-6291-4c40-b1fd-11bc291e4a38)
-export PATH=$PATH:/home/linuxpc/Downloads/tools-rpi/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin  
+export PATH=$PATH:/opt/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin  
 export QMAKESPEC=/usr/local/qt5pilite/mkspecs/devices/linux-rasp-pi-g++
 cd /home/linuxpc/Downloads/showimage/showImage3
 /usr/local/qt5pilite/bin/qmake

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# make-ninhld.sh build
-# make-ninhld.sh clean
-# make-ninhld.sh download
+# make.sh build
+# make.sh clean app_name
+# make.sh cleanall
 
 
 
@@ -46,33 +46,27 @@ BASE_APPLIST=(makescripts \
 	      vlan \
 	      squid squid-accounting calamaris \
 	      fix_somethings)
-BASE_APPLIST=(dhcp)
+BASE_APPLIST=(dhcp.sh)
 
 
 
-ROOTDIR=$(pwd)
-SRC_DIR=${ROOTDIR}/srcdir
-INFO_DIR=${ROOTDIR}/buid
-SCRIPT_DIR=${ROOTDIR}/script
-PATCHES_DIR=${ROOTDIR}/patches
+. ./tools/Config.sh
 
-export ROOTDIR SRC_DIR
-#. ./tools/make-functions
 
 if [ "$1" == "build" ]; then
 	for buildfile in "${BASE_APPLIST[@]}"
 	do
 		if [ -f "${INFO_DIR}/${buildfile}.flag" ]; then
-			echo continue
+			continue
 		fi
-		make -f ${SCRIPT_DIR}/${buildfile} _build && touch "${INFO_DIR}/${buildfile}.flag"
+		${SCRIPT_DIR}/${buildfile}  #&& touch "${INFO_DIR}/${buildfile}.flag"
 	done
 elif [ "$1" == "clean" ]; then
-	echo "clean app"
-
+	echo "clean ${2}"
+	rm -rf ${INFO_DIR}/${2}.flag
 elif [ "$1" == "cleanall" ]; then
 	echo "clean all app"
-	rm -rf 
+	rm -rf ${INFO_DIR}/*
 else
 	echo "other"
 fi

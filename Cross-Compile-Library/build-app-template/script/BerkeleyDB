@@ -9,7 +9,7 @@ obj:= _download_$(DL_FILE) _build _clean
 
 _build: $(INFO_DIR)/$(APP_DIR)
 
-$(INFO_DIR)/$(APP_DIR):	
+$(INFO_DIR)/$(APP_DIR):
 	$(Q)echo ============== Cross $(APP_DIR) ===============
 	$(Q)cd $(SRC_DIR)/$(APP_DIR) &&  PERL5LIB=$(ROOTFS_DIR)/usr/share/perl5:$(ROOTFS_DIR)/usr/lib/perl5 perl Makefile.PL \
 						    PREFIX=$(ROOTFS_DIR)/usr \

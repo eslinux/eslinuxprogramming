@@ -13,6 +13,7 @@ SRC_DIR=$(ROOTDIR)/srcdir
 INFO_DIR=$(ROOTDIR)/buid
 SCRIPT_DIR=$(ROOTDIR)/script
 PATCHES_DIR=$(ROOTDIR)/patches
+EXTPKGS_DIR=$(ROOTDIR)/extpkgs
 
 
 
@@ -29,15 +30,16 @@ else
 endif
 
 
-ifeq ($(shell [ ! -d $(SRC_DIR) ] && echo -n no),no)
-	$(shell mkdir $(SRC_DIR))
+
+ifeq ($(shell [ ! -d $(SRC_DIR) ] && echo -n yes),yes)
+    $(shell mkdir $(SRC_DIR))
 endif
-ifeq ($(shell [ ! -d $(INFO_DIR) ] && echo -n no),no)
+ifeq ($(shell [ ! -d $(INFO_DIR) ] && echo -n yes),yes)
 	$(shell mkdir $(INFO_DIR))
 endif
 
 
-export Q APPS_VERBOSE URL_SOURCE_DL NUM_DL_RETRIES CROSS ROOTDIR ROOTFS_DIR SRC_DIR INFO_DIR PATCHES_DIR
+export Q APPS_VERBOSE URL_SOURCE_DL NUM_DL_RETRIES CROSS ROOTDIR ROOTFS_DIR SRC_DIR INFO_DIR PATCHES_DIR EXTPKGS_DIR
 
 
 
@@ -104,7 +106,8 @@ PHONY+=$(buildlist)
 $(buildlist):
 	@if [ ! -f $(INFO_DIR)/$(basename  $@) ]; then \
 		#$(MAKE) -f $(SCRIPT_DIR)/$(basename  $@) _build && touch $(INFO_DIR)/$(basename  $@) ;\
-		$(MAKE) -f $(SCRIPT_DIR)/$(basename  $@) _build ;\
+		#$(MAKE) -f $(SCRIPT_DIR)/$(basename  $@) _build ;\
+		$(MAKE) -C $(SCRIPT_DIR) -f $(basename  $@) _build ;\
 	fi
 	
 	

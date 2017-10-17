@@ -1,0 +1,38 @@
+ROOTDIR=$(shell pwd)
+SRC_DIR=$(ROOTDIR)/srcdir
+INFO_DIR=$(ROOTDIR)/buid
+SCRIPT_DIR=$(ROOTDIR)/script
+PATCHES_DIR=$(ROOTDIR)/patches
+EXTPKGS_DIR=$(ROOTDIR)/extpkgs
+
+ifeq ($(APPS_VERBOSE),1)
+	Q =
+else
+	Q = @
+endif
+
+
+
+
+define CHECK
+	@echo -e "$(MESSAGE)Check: $($(notdir $@))"
+	wget -T 120 -t 1 --spider -nv -U "IPFireSourceGrabber/2.x" $($(notdir $@)) -O /dev/null
+	@touch $(DIR_CHK)/$(notdir $@)
+endef
+
+define LOAD
+	if [ ! -f "$(SRC_DIR)/$(DL_FILE)" ]; then \
+		@echo -e "$(MESSAGE)Download: $(DL_FILE)" ;\
+		wget -T 60 -t 1 -nv $(DL_FROM)/$(DL_FILE) -O $(SRC_DIR)/$(DL_FILE) ;\
+	fi
+endef
+
+define MD5
+	# error mean file signature don't match the one in lfs script
+	[ "$($@_MD5)" = `md5sum $(SRC_DIR)/$(DL_FILE) | awk '{ print $$1 }'` ]
+	echo "$@ checksum OK"
+	echo "$@" >>$(DIR_INFO)/_build.othersrc-list.log
+endef
+
+
+
