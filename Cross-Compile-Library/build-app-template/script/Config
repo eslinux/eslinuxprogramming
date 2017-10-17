@@ -1,0 +1,8 @@
+define DLFILE
+	ifeq ($(shell [ ! -f $(SRC_DIR)/$(DL_FILE) ] && echo -n yes),yes)
+		$(shell wget -T 60 -t 1 -nv $(DL_FROM)/$(DL_FILE) -O $(SRC_DIR)/$(DL_FILE))
+	endif
+endef
+
+
+

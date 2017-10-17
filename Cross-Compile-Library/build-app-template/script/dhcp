@@ -1,0 +1,20 @@
+
+VER        = 4.3.1
+APP_DIR    = dhcp-$(VER)
+DL_FROM    = $(URL_SOURCE_DL)
+DL_FILE    = $(APP_DIR).tar.gz
+md5_$(DL_FILE) = b3a42ece3c7f2cd2e74a3e12ca881d21
+
+
+_build: $(INFO_DIR)/$(APP_DIR)
+
+$(INFO_DIR)/$(APP_DIR):
+    $(Q)echo ============== Cross $(APP_DIR) ===============
+
+
+
+_clean:
+	$(Q)-rm -f $(INFO_DIR)/$(APP_DIR)
+
+_download:
+	$(Q)echo ============== _download asas===============
